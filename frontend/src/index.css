@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        
+        /* Light mode - keeping defaults but not used since we force dark */
+        --background: 1 0 0;
+        --foreground: 0.145 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.145 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.145 0 0;
+        --primary: 0.205 0 0;
+        --primary-foreground: 0.985 0 0;
+        --secondary: 0.97 0 0;
+        --secondary-foreground: 0.205 0 0;
+        --muted: 0.97 0 0;
+        --muted-foreground: 0.556 0 0;
+        --accent: 0.97 0 0;
+        --accent-foreground: 0.205 0 0;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.922 0 0;
+        --input: 0.922 0 0;
+        --ring: 0.708 0 0;
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+        --sidebar: 0.985 0 0;
+        --sidebar-foreground: 0.145 0 0;
+        --sidebar-primary: 0.205 0 0;
+        --sidebar-primary-foreground: 0.985 0 0;
+        --sidebar-accent: 0.97 0 0;
+        --sidebar-accent-foreground: 0.205 0 0;
+        --sidebar-border: 0.922 0 0;
+        --sidebar-ring: 0.708 0 0;
+    }
+
+    .dark {
+        /* Dark SaaS/AI Theme with vibrant gradients */
+        --background: 0.12 0.015 265;
+        --foreground: 0.98 0.005 265;
+        --card: 0.18 0.02 265;
+        --card-foreground: 0.98 0.005 265;
+        --popover: 0.15 0.018 265;
+        --popover-foreground: 0.98 0.005 265;
+        
+        /* Primary: Vibrant Purple/Blue */
+        --primary: 0.65 0.25 270;
+        --primary-foreground: 0.98 0.005 265;
+        
+        /* Secondary: Deep Purple */
+        --secondary: 0.25 0.03 265;
+        --secondary-foreground: 0.98 0.005 265;
+        
+        /* Muted: Subtle gray-purple */
+        --muted: 0.22 0.02 265;
+        --muted-foreground: 0.65 0.015 265;
+        
+        /* Accent: Cyan/Teal for contrast */
+        --accent: 0.70 0.20 200;
+        --accent-foreground: 0.12 0.015 265;
+        
+        /* Destructive: Vibrant red */
+        --destructive: 0.60 0.25 25;
+        --destructive-foreground: 0.98 0.005 265;
+        
+        /* Borders and inputs with subtle transparency */
+        --border: 0.98 0.005 265 / 12%;
+        --input: 0.98 0.005 265 / 15%;
+        --ring: 0.65 0.25 270;
+        
+        /* Charts with vibrant colors */
+        --chart-1: 0.65 0.25 270;
+        --chart-2: 0.70 0.20 200;
+        --chart-3: 0.68 0.22 320;
+        --chart-4: 0.72 0.18 180;
+        --chart-5: 0.70 0.20 140;
+        
+        /* Sidebar */
+        --sidebar: 0.15 0.018 265;
+        --sidebar-foreground: 0.98 0.005 265;
+        --sidebar-primary: 0.65 0.25 270;
+        --sidebar-primary-foreground: 0.98 0.005 265;
+        --sidebar-accent: 0.22 0.02 265;
+        --sidebar-accent-foreground: 0.98 0.005 265;
+        --sidebar-border: 0.98 0.005 265 / 12%;
+        --sidebar-ring: 0.65 0.25 270;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Custom scrollbar for dark theme */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: oklch(var(--background));
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: oklch(var(--muted));
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: oklch(var(--muted-foreground));
+    }
+    
+    /* Glassmorphism effect */
+    .glass {
+        background: oklch(var(--card) / 0.5);
+        backdrop-filter: blur(12px);
+        border: 1px solid oklch(var(--border));
+    }
+    
+    /* Gradient text animation */
+    @keyframes gradient-shift {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+    
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-shift 3s ease infinite;
+    }
+}
+
+@layer components {
+    /* Prose styles for content pages - using component layer instead of @apply */
+    .prose {
+        color: oklch(var(--foreground) / 0.9);
+    }
+    
+    .prose h2 {
+        color: oklch(var(--foreground));
+    }
+    
+    .prose strong {
+        color: oklch(var(--foreground));
+        font-weight: 600;
+    }
+    
+    .prose a {
+        color: oklch(var(--primary));
+        transition: color 0.2s;
+    }
+    
+    .prose a:hover {
+        color: oklch(var(--accent));
+    }
+    
+    .prose ul {
+        color: oklch(var(--foreground) / 0.8);
+    }
+}
